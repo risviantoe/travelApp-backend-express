@@ -1,0 +1,22 @@
+<!-- Modal -->
+<div class="modal fade" id="deleteModalFeature" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body py-5 text-center">
+        <h5 class="modal-title" id="exampleModalLabel">Are you sure you want to delete <span class="font-weight-bold" id="featureNameDelete"></span>?</h5>
+      </div>
+      <form action="/admin/item/<%= itemId %>/feature?_method=DELETE" method="POST">
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" class="close" data-dismiss="modal" aria-label="Close">
+            Cancel
+          </button>
+          <button type="submit" class="btn btn-danger">
+            Delete
+          </button>
+        </div>
+        <input type="hidden" name="id" id="featureIdDelete">
+        <input type="hidden" name="itemId" value="<%= itemId %>">
+      </form>
+    </div>
+  </div>
+</div>

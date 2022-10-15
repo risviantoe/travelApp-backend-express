@@ -1,0 +1,106 @@
+<%- include('../../../partials/header.ejs') %>
+  <div id="wrapper">
+    <%- include('../../../partials/sidebar.ejs') %>
+      <div id="content-wrapper" class="d-flex flex-column">
+        <div id="content">
+          <%- include('../../../partials/navbar.ejs') %>
+            <div class="container-fluid">
+              <%- include('../../../partials/message.ejs') %>
+                <h1 class="h3 mb-4 text-gray-800">Detail Item</h1>
+                <nav>
+                  <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                    <button class="nav-link active" id="nav-home-tab" data-toggle="tab" data-target="#show-feature"
+                      type="button" role="tab" aria-controls="nav-home" aria-selected="true">Show Features</button>
+                    <button class="nav-link" id="nav-profile-tab" data-toggle="tab" data-target="#show-activity"
+                      type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Show Activity</button>
+                  </div>
+                </nav>
+                <div class="tab-content" id="nav-tabContent">
+                  <%- include('show_feature.ejs') %>
+                    <%- include('show_activity.ejs') %>
+                </div>
+            </div>
+        </div>
+        <%- include('../../../partials/footer.ejs') %>
+      </div>
+  </div>
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
+  <!-- Logout Modal-->
+  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+          <a class="btn btn-primary" href="login.html">Logout</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <%- include('modal_edit_feature.ejs') %>
+    <%- include('modal_edit_activity.ejs') %>
+      <%- include('modal_delete_feature.ejs') %>
+      <%- include('modal_delete_activity.ejs') %>
+        <%- include('../../../partials/js.ejs') %>
+          <script>
+            $(document).ready(function () {
+              $('#dataTableFeature').DataTable()
+            })
+            $(document).ready(function () {
+              $('#dataTableActivity').DataTable()
+            })
+          </script>
+          <script>
+            ClassicEditor
+              .create(document.querySelector('#itemDescription'))
+          </script>
+          <script>
+            $('#dataTableFeature').on('click', '.button-delete', function () {
+              let id = $(this).data('id')
+              let name = $(this).data('name')
+              $('#deleteModalFeature').modal('show')
+              $('#featureIdDelete').val(id)
+              $('#featureNameDelete').text(name)
+            })
+
+            $('#dataTableActivity').on('click', '.button-delete', function () {
+              console.log('click');
+              let id = $(this).data('id')
+              let name = $(this).data('name')
+              $('#deleteModalActivity').modal('show')
+              $('#activityIdDelete').val(id)
+              $('#activityNameDelete').text(name)
+            })
+          </script>
+          <script>
+            $('#dataTableFeature').on('click', '.button-update', function () {
+              let id = $(this).data('id')
+              let name = $(this).data('name')
+              let qty = $(this).data('qty')
+              $('#editModalFeature').modal('show')
+              $('#itemIdFeatureUpdate').val(id)
+              $('#nameFeatureUpdate').val(name)
+              $('#qtyFeatureUpdate').val(qty)
+            })
+
+            $('#dataTableActivity').on('click', '.button-update', function () {
+              let id = $(this).data('id')
+              let name = $(this).data('name')
+              let type = $(this).data('type')
+              let isPopular = $(this).data('ispopular')
+              $('#editModalActivity').modal('show')
+              $('#itemIdActivityUpdate').val(id)
+              $('#nameActivityUpdate').val(name)
+              $('#typeActivityUpdate').val(type)
+              $('#isPopularActivityUpdate').prop('checked', isPopular)
+            })
+          </script>
